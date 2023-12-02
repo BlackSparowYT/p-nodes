@@ -1,0 +1,14 @@
+*.zip
+*(Conflicted copy * by *).*
+*log.txt
+log.txt
+*credentials.php
+*config.php
+*errors*
+test-*/
+test-*/*
+test-*.php
+test-*.css
+test-*.html
+test-*.js
+files/images/test-*/*
