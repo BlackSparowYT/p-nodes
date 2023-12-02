@@ -3,6 +3,7 @@
     $page['name'] = "reset";
     $page['category'] = "account";
     $page['path_lvl'] = 2;
+    $page['logo'] = "logo.svg";
     require_once("../files/components/account-setting.php");
 
     // Connect to the database
@@ -55,15 +56,13 @@
     <?php include($path."files/components/head.php") ?>
     
     <body class="<?=$page['name']?> page">
-        <main class="register-page account-page">
+        <main class="register-page page--form">
             <div class="content">
-                <?php echo '
-                    <a href="'.$path.'index.php">
-                        <div class="image-block">
-                            <img src="'.$path.'files/images/logo-blank.png"/>
-                        </div>
-                    </a>
-                '; ?>
+                <a>
+                    <div class="image-block">
+                        <img src="<?= $path ?>files/logos/<?= $page['logo'] ?>"/>
+                    </div>
+                </a>
                 <div class="form">
                     <form method="post">
                         <h2>Verander Wachtwoord</h2>
@@ -163,7 +162,7 @@
                         <div class="link">
                             <hr>
                             <h5>
-                                <a href="dashboard.php">TERUG</a>
+                                <a href="index.php">TERUG</a>
                             </h5>
                             <hr>
                         </div>

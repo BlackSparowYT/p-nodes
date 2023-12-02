@@ -167,7 +167,6 @@
 
 
     function get_user_location() {
-        return 'NL';
 
         $ipaddress = '';
         if (isset($_SERVER['HTTP_CLIENT_IP'])) {

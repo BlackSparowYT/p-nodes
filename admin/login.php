@@ -3,6 +3,7 @@
     $page['name'] = "login";
     $page['category'] = "account";
     $page['path_lvl'] = 2;
+    $page['logo'] = "logo.svg";
     require_once("../files/components/account-setting.php");
 
 
@@ -44,11 +45,11 @@
                 exit();
             } else {
                 // If the password doesn't match, show an error message
-                $error = "Email of Wachtwoord is incorrect.";
+                $error = "Email or Password is incorrect.";
             }
         } else {
             // If the password doesn't match, show an error message
-            $error = "Email of Wachtwoord is incorrect.";
+            $error = "Email or Password is incorrect.";
         }
     }
 ?>
@@ -60,22 +61,20 @@
     
     <body class="<?=$page['name']?> page">
 
-        <main class="login-page account-page">
+        <main class="login-page page--form">
             <div class="content">
-                <?php echo '
-                <a href="'.$path.'index.php">
+                <a>
                     <div class="image-block">
-                        <img src="'.$path.'files/images/logo-blank.png"/>
+                        <img src="<?= $path ?>files/logos/<?= $page['logo'] ?>"/>
                     </div>
                 </a>
-                '; ?>
                 <div class="form">
                     <form method="post">
                         <h2>Login</h2>
                         <div class="link">
                             <hr>
                             <h5>
-                                LOGIN MET EMAIL
+                                LOGIN WITH EMAIL
                             </h5>
                             <hr>
                         </div>
@@ -83,44 +82,46 @@
                             <h4>Email</h4>
                             <input type="email" name="email" id="email" required>
                         </div>
-                        <div>
-                            <h4>Wachtwoord <a href="forgot-pass.php?action=email">wachtwoord vergeten</a></h4>
-                            <input type="password" name="password" id="password" required>
-                            <a id="showPass" onclick="showPass()"><img id="showPassBtn" src="<?= $path ?>files/icons/pass-vis.png"></a>
-                            <script>
-                                function showPass() {
-                                    var myPass = document.getElementById("password");
-                                    var showPass = document.getElementById("showPass");
-                                    var showPassBtn = document.getElementById("showPassBtn");
-                                    if (myPass.type === "password") {
-                                        myPass.type = "text";
-                                        showPassBtn.style.backgroundColor = "#E9E9E9";
-                                        showPassBtn.src="../template/save.png";
-                                        showPassBtn.src = "<?= $path ?>files/icons/pass-invis.png";
-                                    } else {
-                                        myPass.type = "password";
-                                        showPassBtn.style.backgroundColor = "#ADD5D0";
-                                        showPassBtn.src = "<?= $path ?>files/icons/pass-vis.png";
-                                    }
-                                }
-                            </script>
+                        <div class="passBox">
+                            <h4>Password <a href="forgot-pass.php?action=email">forgot password</a></h4>
+                            <input type="password" name="password" class="password" required>
+                            <a class="showPass" onclick="showPass()"><i class="showPassBtn da-icon da-icon--eye"></i></a>
                         </div>
                         <?php if (isset($error)) : ?>
                             <div>
-                                <p class="errors" style="color: darkred;"><?php echo $error; ?></p>
+                                <p class="errors"><?= $error; ?></p>
                             </div>
                         <?php endif; ?>
                         <div class="link">
-                            <button type="submit" name="login">Login</button>
+                            <button class="btn btn--primary" type="submit" name="login">Login</button>
                         </div>
                         <div class="link">
                             <hr>
                             <h5>
-                                <a href="register.php">REGISTREER</a>
+                                <a href="register.php">REGISTER</a>
                             </h5>
                             <hr>
                         </div>
                     </form>
+                    <script>
+                        function showPass() {
+                            const passwords = document.querySelectorAll(".passBox");
+                            passwords.forEach(password => {
+                                var myPass = password.querySelector(".password");
+                                var showPass = password.querySelector(".showPass");
+                                var showPassBtn = password.querySelector(".showPassBtn");
+                                if (myPass.type === "password") {
+                                    myPass.type = "text";
+                                    showPassBtn.classList.remove("da-icon--eye");
+                                    showPassBtn.classList.add("da-icon--eye-slash");
+                                } else {
+                                    myPass.type = "password";
+                                    showPassBtn.classList.add("da-icon--eye");
+                                    showPassBtn.classList.remove("da-icon--eye-slash");
+                                }
+                            });
+                        }
+                    </script>
                     
                 </div>
             </div>

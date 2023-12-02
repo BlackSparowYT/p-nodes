@@ -5,6 +5,71 @@ html:has(.page--account) { background-color: var(--bg-clr-dark); }
 
 
 
+
+
+/* Account Pages */
+
+/** Pages **/
+
+.login-page,
+.register-page,
+.admin-page,
+.admin-item {
+    background-color: var(--primary);
+
+    background-image: url(images/stacked-waves.png);
+    background-repeat: no-repeat;
+    background-position: bottom left;
+    background-size: contain;
+}
+
+.form .errors {
+    max-width: 90%;
+}
+
+
+
+/*** Account Pages | Content ***/
+
+.page--form .content { min-width: 230px; min-height: 380px; height: 100vh; width: 100%; display: flex; align-items: center; justify-content: center; flex-direction: row; border-radius: 20px; overflow: auto; }
+.page--form .content a { width: min-content; height: min-content; }
+.page--form .content .image-block { display: flex; align-items: center; justify-content: center; height: 500px; min-width: 350px; width: 20%; background-color: var(--bg-clr-dark); border-radius: 20px 0 0 20px; pointer-events: none; }
+.page--form .content .image-block img { width: 80%; }
+
+
+/*** Account Pages | form ***/
+
+.page--form .form { min-width: 230px; max-width: 370px; height: 500px; width: 25%; background-color: var(--bg-clr-light); color: var(--text-clr); display: flex; align-items: center; justify-content: center; flex-direction: column; border-radius: 0 20px 20px 0; overflow: hidden; }
+.page--form .form form { width: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; }
+.page--form .form h2 { margin: 10px 0 20px; text-align: center; color: var(--black); }
+.page--form .form form > div { min-width: 230px; width: 85%; margin-bottom: 20px; }
+.page--form .form h4 { margin-bottom: 10px; color: var(--black); display: flex; justify-content: space-between; align-items: end; }
+.page--form .form h4 a { opacity: .7; font-size: small; width: fit-content; margin: 0 !important; }
+.page--form .form input { width: calc(100% - 10px); height: 32px; background-color: var(--transparent); border: 1px lightgray solid; padding: 5px; border-radius: 5px; transition: all .3s; }
+.page--form .form .passBox { position: relative; }
+.page--form .form .password { width: calc(100% - 50px); }
+.page--form .form .showPass { margin: 0; background-color: var(--text-clr); width: 32px; height: 32px; display: flex; justify-content: center; align-items: center; bottom: 0; right: 0; position: absolute; border-radius: 3px; cursor: pointer; border: 2px solid var(--secondary); transition: all .3s; }
+.page--form .form .showPass .da-icon { --clr: var(--text-clr-invert); position: absolute;}
+.page--form .form input:hover, .page--form .form input:focus, .page--form .form input:focus-visible { transition: all .3s; border: gray 1px solid; outline: 0; }
+.page--form .form button { width: 100%; background-color: var(--accent); color: var(--black); padding: 15px 20px; border-radius: 10px; transition: all .3s; border: none; }
+.page--form .form button:hover { background-color: var(--accent-hover); cursor: pointer; }
+.page--form .form form div > .link-button { text-align: center; width: 100%; background-color: var(--accent); color: var(--black); padding: 15px 20px; border-radius: 10px; transition: all .3s; border: none; }
+.page--form .form form div > .link-button:hover { background-color: var(--accent-hover); cursor: pointer; }
+.page--form .form form div > button > p { --fs: 13px; }
+.page--form .form form div > .link-button > p { --fs: 13px; }
+.page--form .form form a { margin: 0 0 15px 0; color: var(--text-clr); }
+.page--form .form form .link { margin: 10px 0; display: flex; justify-content: space-between; flex-direction: row; align-items: center; }
+.page--form .form form .link hr { text-align: center; width: 20%; color: var(--text-clr); }
+.page--form .form form .link h5 { font-weight: 400; color: var(--text-clr); text-align: center; --fs: 16px; }
+.page--form .form form .link h5 a { --fs: 16px; }
+.page--form .form form .errors { color: var(--red-200) !important; }
+
+
+
+
+
+
+
 /** Account Sidebar **/
 
 .page--account nav { height: 100vh; width: 250px; position: fixed; top: 0; left: 0; background-color: var(--bg-clr); }

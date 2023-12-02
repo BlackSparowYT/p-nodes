@@ -3,6 +3,7 @@
     $page['name'] = "register";
     $page['category'] = "account";
     $page['path_lvl'] = 2;
+    $page['logo'] = "logo.svg";
     require_once("../files/components/account-setting.php");
 
     // Check if the user has submitted the registration form
@@ -49,7 +50,7 @@
             exit();
         } else {
             // If the email already exists, show an error message
-            $error = "Email is al in gebruik.";
+            $error = "Email is already in use.";
         }
     }
 ?>
@@ -60,22 +61,20 @@
     <?php include($path."files/components/head.php") ?>
     
     <body class="<?=$page['name']?> page">
-        <main class="register-page account-page">
+        <main class="register-page page--form">
             <div class="content">
-                <?php echo '
-                    <a href="'.$path.'index.php">
-                        <div class="image-block">
-                            <img src="'.$path.'files/images/logo-blank.png"/>
-                        </div>
-                    </a>
-                '; ?>
+                <a>
+                    <div class="image-block">
+                        <img src="<?= $path ?>files/logos/<?= $page['logo'] ?>"/>
+                    </div>
+                </a>
                 <div class="form">
                     <form method="post">
-                        <h2>Registreer</h2>
+                        <h2>Register</h2>
                         <div class="link">
                             <hr>
                             <h5>
-                                REGISTREER MET EMAIL
+                                REGISTER WITH EMAIL
                             </h5>
                             <hr>
                         </div>
@@ -84,51 +83,49 @@
                             <input type="email" name="email" id="email" required>
                         </div>
                         <div>
-                            <h3>Naam</h3>
+                            <h4>Name</h4>
                             <input type="text" name="name" required>
                         </div>
-                        <div>
-                            <h4>Wachtwoord</h4>
-                            <input type="password" name="password" id="password" required>
-                            <?php
-                            echo '
-                                <a id="showPass" onclick="showPass()"><img id="showPassBtn" src="'.$path.'files/icons/pass-vis.png"></a>
-                                <script>
-                                    function showPass() {
-                                        var myPass = document.getElementById("password");
-                                        var showPass = document.getElementById("showPass");
-                                        var showPassBtn = document.getElementById("showPassBtn");
-                                        if (myPass.type === "password") {
-                                            myPass.type = "text";
-                                            showPassBtn.style.backgroundColor = "#E9E9E9";
-                                            showPassBtn.src="../template/save.png";
-                                            showPassBtn.src = "'.$path.'files/icons/pass-invis.png";
-                                        } else {
-                                            myPass.type = "password";
-                                            showPassBtn.style.backgroundColor = "#ADD5D0";
-                                            showPassBtn.src = "'.$path.'files/icons/pass-vis.png";
-                                        }
-                                    }
-                                </script>
-                            ';
-                            ?>
+                        <div class="passBox">
+                            <h4>Password</h4>
+                            <input type="password" name="password" class="password" required>
+                            <a class="showPass" onclick="showPass()"><i class="showPassBtn da-icon da-icon--eye"></i></a>
                         </div>
                         <?php if (isset($error)) : ?>
                             <div>
-                                <p class="errors" style="color: darkred;"><?php echo $error; ?></p>
+                                <p class="errors"><?= $error; ?></p>
                             </div>
                         <?php endif; ?>
                         <div class="link">
-                            <button type="submit" name="register">Registreer</button>
+                            <button class="btn btn--primary" type="submit" name="register">Register</button>
                         </div>
                         <div class="link">
                             <hr>
                             <h5>
-                                <a href="login.php">LOGIN</a>
+                                <a href="index.php">LOGIN</a>
                             </h5>
                             <hr>
                         </div>
                     </form>
+                    <script>
+                        function showPass() {
+                            const passwords = document.querySelectorAll(".passBox");
+                            passwords.forEach(password => {
+                                var myPass = password.querySelector(".password");
+                                var showPass = password.querySelector(".showPass");
+                                var showPassBtn = password.querySelector(".showPassBtn");
+                                if (myPass.type === "password") {
+                                    myPass.type = "text";
+                                    showPassBtn.classList.remove("da-icon--eye");
+                                    showPassBtn.classList.add("da-icon--eye-slash");
+                                } else {
+                                    myPass.type = "password";
+                                    showPassBtn.classList.add("da-icon--eye");
+                                    showPassBtn.classList.remove("da-icon--eye-slash");
+                                }
+                            });
+                        }
+                    </script>
                 </div>
             </div>
         </main>

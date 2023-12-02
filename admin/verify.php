@@ -3,16 +3,15 @@
     $page['name'] = "verify";
     $page['category'] = "account";
     $page['path_lvl'] = 2;
+    $page['logo'] = "logo.svg";
     require_once("../files/components/account-setting.php");
-
-    require($path."files/mail-config.php");
 
     use PHPMailer\PHPMailer\PHPMailer;
     use PHPMailer\PHPMailer\Exception;
 
-    require '../files/mailing/PHPMailer/src/Exception.php';
-    require '../files/mailing/PHPMailer/src/PHPMailer.php';
-    require '../files/mailing/PHPMailer/src/SMTP.php';
+    require '../files/components/PHPMailer/src/Exception.php';
+    require '../files/components/PHPMailer/src/PHPMailer.php';
+    require '../files/components/PHPMailer/src/SMTP.php';
 
     $stmt = $link->prepare("SELECT id, verify_token FROM `users` WHERE email = ? AND id = ?");
     $stmt->bind_param("si", $email, $id);
@@ -44,12 +43,12 @@
 
         //Content
         $mail->isHTML(false);                                        //Set email format to HTML
-        $mail->Subject = "Account Verifieren!";
-        $mail->Body    = "Om je account te verifiëren kunt u onderstaande link gebruiken.\nLog eerst in en klik dan op de volgende link:\n\n".$site['url']."/account/verify.php?verify_token=".$verify_token."\nWerkt deze link niet? Neem dan contact op met onze klanten service: \n".$site['url']."/contact.php";
+        $mail->Subject = "Verify account!";
+        $mail->Body    = "To verify your account use the link bellow.\nLogin and click the link:\n\n".$site['url']."/admin/verify.php?verify_token=".$verify_token."\nDoes the link not work or didnt you request one? Get in contact with our help desk \n".$site['url']."/contact.php";
     } catch (Exception $e) {
         // Log the error
 
-        $file = fopen("../files/mail-errors.txt","a");
+        $file = fopen("../files/erros/mail.txt","a");
         $ip = $_SERVER['REMOTE_ADDR'];
         $date = date("Y/m/d H:i:s");
         $fdata = "\n\nDate & Time: ".$date.", \nError: {".$mail->ErrorInfo."};\nEmail: ".$email.", Subject: ".$mail->Subject.", Content:".$mail->Body.";";
@@ -109,15 +108,13 @@
     <?php include($path."files/components/head.php") ?>
     
     <body class="<?=$page['name']?> page">
-        <main class="login-page account-page">
+        <main class="login-page page--form">
             <div class="content">
-                <?php echo '
-                <a href="'.$path.'index.php">
+                <a>
                     <div class="image-block">
-                        <img src="'.$path.'files/images/logo-blank.png"/>
+                        <img src="<?= $path ?>files/logos/<?= $page['logo'] ?>"/>
                     </div>
                 </a>
-                '; ?>
                 <div class="form">
                     <form method="post">
                         <h2>Verifiëren</h2>
@@ -142,13 +139,13 @@
                         </div>
                         <?php if (isset($error)) : ?>
                             <div>
-                                <p class="errors" style="color: darkred;"><?php echo $error; ?></p>
+                                <p class="errors"><?php echo $error; ?></p>
                             </div>
                         <?php endif; ?>
                         <div class="link">
                             <hr>
                             <h5>
-                                <a href="logout.php">LOG UIT</a>
+                                <a href="logout.php">LOG OUT</a>
                             </h5>
                             <hr>
                         </div>

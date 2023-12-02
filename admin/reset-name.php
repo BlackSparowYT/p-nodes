@@ -3,6 +3,7 @@
     $page['name'] = "reset";
     $page['category'] = "account";
     $page['path_lvl'] = 2;
+    $page['logo'] = "logo.svg";
     require_once("../files/components/account-setting.php");
 
     // Connect to the database
@@ -70,58 +71,35 @@
     <?php include($path."files/components/head.php") ?>
     
     <body class="<?=$page['name']?> page">
-        <main class="register-page account-page">
+        <main class="register-page page--form">
             <div class="content">
-                <?php echo '
-                    <a href="'.$path.'index.php">
-                        <div class="image-block">
-                            <img src="'.$path.'files/images/logo-blank.png"/>
-                        </div>
-                    </a>
-                '; ?>
+                <a>
+                    <div class="image-block">
+                        <img src="<?= $path ?>files/logos/<?= $page['logo'] ?>"/>
+                    </div>
+                </a>
                 <div class="form">
                     <form method="post">
-                        <h2>Verander Naam</h2>
+                        <h2>Change name</h2>
                         <div class="link">
                             <hr>
                             <h5>
-                                VERANDER NAAM
+                                CHANGE NAME
                             </h5>
                             <hr>
                         </div>
                         <div>
-                            <h4>Nieuwe Naam</h4>
+                            <h4>New name</h4>
                             <input type="text" name="new_username" required>
                         </div>
                         <div>
-                            <h4>Bevestig Nieuwe Naam</h4>
+                            <h4>Confirm name</h4>
                             <input type="text" name="confirm_username" required>
                         </div>
-                        <div>
-                            <h4>Huidige Wachtwoord</h4>
-                            <input type="password" name="password" id="password1" required>
-                            <?php
-                            echo '
-                                <a id="showPass1" onclick="showPass1()"><img id="showPassBtn1" src="'.$path.'files/icons/pass-vis.png"></a>
-                                <script>
-                                    function showPass1() {
-                                        var myPass = document.getElementById("password1");
-                                        var showPass = document.getElementById("showPass1");
-                                        var showPassBtn = document.getElementById("showPassBtn1");
-                                        if (myPass.type === "password") {
-                                            myPass.type = "text";
-                                            showPassBtn.style.backgroundColor = "#E9E9E9";
-                                            showPassBtn.src="../template/save.png";
-                                            showPassBtn.src = "'.$path.'files/icons/pass-invis.png";
-                                        } else {
-                                            myPass.type = "password";
-                                            showPassBtn.style.backgroundColor = "#ADD5D0";
-                                            showPassBtn.src = "'.$path.'files/icons/pass-vis.png";
-                                        }
-                                    }
-                                </script>
-                            ';
-                            ?>
+                        <div class="passBox">
+                            <h4>Password</h4>
+                            <input type="password" name="password" class="password" required>
+                            <a class="showPass" onclick="showPass()"><i class="showPassBtn da-icon da-icon--eye"></i></a>
                         </div>
                         <?php if (isset($error)) : ?>
                             <div>
@@ -129,16 +107,35 @@
                             </div>
                         <?php endif; ?>
                         <div class="link">
-                            <button type="submit" name="change_username">Verander Naam</button>
+                            <button class="btn btn--primary" type="submit" name="change_username">Change name</button>
                         </div>
                         <div class="link">
                             <hr>
                             <h5>
-                                <a href="dashboard.php">TERUG</a>
+                                <a href="index.php">BACK</a>
                             </h5>
                             <hr>
                         </div>
                     </form>
+                    <script>
+                        function showPass() {
+                            const passwords = document.querySelectorAll(".passBox");
+                            passwords.forEach(password => {
+                                var myPass = password.querySelector(".password");
+                                var showPass = password.querySelector(".showPass");
+                                var showPassBtn = password.querySelector(".showPassBtn");
+                                if (myPass.type === "password") {
+                                    myPass.type = "text";
+                                    showPassBtn.classList.remove("da-icon--eye");
+                                    showPassBtn.classList.add("da-icon--eye-slash");
+                                } else {
+                                    myPass.type = "password";
+                                    showPassBtn.classList.add("da-icon--eye");
+                                    showPassBtn.classList.remove("da-icon--eye-slash");
+                                }
+                            });
+                        }
+                    </script>
                 </div>
             </div>
         </main>

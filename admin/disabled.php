@@ -3,17 +3,18 @@
     $page['name'] = "disabled";
     $page['category'] = "account";
     $page['path_lvl'] = 2;
+    $page['logo'] = "logo.svg";
     require_once("../files/components/account-setting.php");
 
     $email = $_SESSION['email'];
 
-    $stmt = $link->prepare("SELECT id, is_disabled FROM `users` WHERE email = ?");
+    $stmt = $link->prepare("SELECT id, disabled FROM `users` WHERE email = ?");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $is_run = $stmt->get_result();
     $result = mysqli_fetch_assoc($is_run);
 
-    $is_disabled = $result['is_disabled'];
+    $is_disabled = $result['disabled'];
 
     if ($is_disabled == 0) {
         $_SESSION['disabled'] == false;
@@ -29,38 +30,36 @@
     <?php include($path."files/components/head.php") ?>
     
     <body class="<?=$page['name']?> page">
-        <main class="login-page account-page">
+        <main class="login-page page--form">
             <div class="content">
-                <?php echo '
-                <a href="'.$path.'index.php">
+                <a>
                     <div class="image-block">
-                        <img src="'.$path.'files/images/logo-blank.png"/>
+                        <img src="<?= $path ?>files/logos/<?= $page['logo'] ?>"/>
                     </div>
                 </a>
-                '; ?>
                 <div class="form">
                     <form method="post">
-                        <h2>Geblockeerd</h2>
+                        <h2>Block</h2>
                         <div class="link">
                             <hr>
                             <h5>
-                                GEBLOCKEERD ACCOUNT
+                                ACCOUNT BLOCKED
                             </h5>
                             <hr>
                         </div>
                         <div>
-                            <h4>Je account is geblockeerd!</h4>
-                            <p>Je account is door ons system geblockeerd, neem contact met ons op voor meer informatie en om je account te deblockeren.</p>
+                            <h4>Your account has been blocked!</h4>
+                            <p>Your account has been blocked by our system. Please contact us for more information and to unblock your account.</p>
                         </div>
                         <?php if (isset($error)) : ?>
                             <div>
-                                <p class="errors" style="color: darkred;"><?php echo $error; ?></p>
+                                <p class="errors"><?php echo $error; ?></p>
                             </div>
                         <?php endif; ?>
                         <div class="link">
                             <hr>
                             <h5>
-                                <a href="logout.php">LOG UIT</a>
+                                <a href="logout.php">LOG OUT</a>
                             </h5>
                             <hr>
                         </div>

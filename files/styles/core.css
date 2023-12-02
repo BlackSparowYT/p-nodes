@@ -92,7 +92,7 @@
 
     --primary: #202020;
     --secondary: #f3f3f3;
-    --accent: #8FD4FF;
+    --accent: #c7d03e;
     --secondary-accent: #255fa3;
 
     --primary-100: color-mix(in oklab, var(--primary) 10%, white);
@@ -219,6 +219,8 @@ h1, .h1 { --fs: var(--fs-x-large); --lh: 1; --fw: 900; }
 h2, .h2 { --fs: var(--fs-large); --lh: 1; --fw: 900; }
 h3, .h3 { --fs: var(--fs-medium); --lh: 1; --fw: 700;}
 h4, .h4 { --fs: var(--fs-medium); --lh: 1; --fw: normal; }
+h5, .h5 { --fs: var(--fs-medium); --lh: 1; --fw: normal; }
+h6, .h6 { --fs: var(--fs-medium); --lh: 1; --fw: normal; }
 p, .p { --fs: var(--fs-medium); --lh: 33px; --fw: normal; }
 a { --fs: var(--fs-x-small); --lh: 1; text-decoration: none; }
 li, .li { --fs: var(--fs-medium); --lh: 33px; --fw: normal; }
@@ -398,9 +400,9 @@ footer .block-2 a img { width: 40px; height: 40px; }
 /*** Buttons ***/
 
 .btn { --clr: var(--text-clr); --clr-bg: var(--bg-clr); --border: 1px solid transparent; --padding: 0; color: var(--clr); cursor: pointer; }
-.btn:not(.btn.btn--link,.btn.btn--readmore) { background-color: var(--clr-bg); border: var(--border); padding: var(--padding); min-height: 56px; min-width: 360px; border-radius: 20px; display: grid; place-content: center; }
+.btn:not(.btn.btn--link,.btn.btn--readmore) { background-color: var(--clr-bg); border: var(--border); padding: var(--padding); min-height: 56px; min-width: min(100%,360px); border-radius: 20px; display: grid; place-content: center; }
 
-.btn.btn--small { --padding: 0; --fs: 14px; min-height: 36px !important; min-width: 260px !important; }
+.btn.btn--small { --padding: 0; --fs: 14px; min-height: 36px !important; min-width: min(100%,260px) !important; }
 
 .btn.btn--primary { --clr: var(--text-clr-invert); --border: 1px solid var(--accent); --clr-bg: var(--accent); }
 .btn.btn--primary-outline { --clr: var(--accent); --border: 1px solid var(--accent); --clr-bg: transparent; }
