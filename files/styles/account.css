@@ -5,27 +5,10 @@ html:has(.page--account) { background-color: var(--bg-clr-dark); }
 
 
 
-
-
-/* Account Pages */
-
 /** Pages **/
 
-.login-page,
-.register-page,
-.admin-page,
-.admin-item {
-    background-color: var(--primary);
-
-    background-image: url(images/stacked-waves.png);
-    background-repeat: no-repeat;
-    background-position: bottom left;
-    background-size: contain;
-}
-
-.form .errors {
-    max-width: 90%;
-}
+.login-page, .register-page, .admin-page, .admin-item { background-color: var(--primary); background-image: url(images/stacked-waves.png); background-repeat: no-repeat; background-position: bottom left; background-size: contain; }
+.form .errors { max-width: 90%; }
 
 
 
@@ -63,10 +46,6 @@ html:has(.page--account) { background-color: var(--bg-clr-dark); }
 .page--form .form form .link h5 { font-weight: 400; color: var(--text-clr); text-align: center; --fs: 16px; }
 .page--form .form form .link h5 a { --fs: 16px; }
 .page--form .form form .errors { color: var(--red-200) !important; }
-
-
-
-
 
 
 
