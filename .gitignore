@@ -12,3 +12,4 @@ test-*.css
 test-*.html
 test-*.js
 files/images/test-*/*
+google*.html
