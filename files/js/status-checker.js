@@ -1,15 +1,26 @@
 document.addEventListener("DOMContentLoaded", function () {
     const servers = document.querySelectorAll(".card--server");
 
-    console.log(servers)
     servers.forEach(server => {
         const serverUrl = server.getAttribute("data-url");
         checkServerStatus(server.querySelector('.status'), server, serverUrl);
     });
 
+    function recheckStatus() {
+        console.log("Rechecking status");
+        servers.forEach(server => {
+            const serverUrl = server.getAttribute("data-url");
+            server.classList.remove("online");
+            server.classList.remove("offline");
+            server.classList.add("unkown");
+            checkServerStatus(server.querySelector('.status'), server, serverUrl);
+        });
+        setTimeout(recheckStatus, 10000);
+    }
+
+    recheckStatus();
+
     function checkServerStatus(text, card, url) {
-        console.log(text)
-        console.log(card)
         const proxyUrl = '/files/components/proxy.php?url=' + encodeURIComponent(url);
         const xhr = new XMLHttpRequest();
         xhr.open("GET", proxyUrl, true);
